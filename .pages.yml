@@ -1,3 +1,4 @@
+
 media:
   input: assets/uploads
   output: /assets/uploads
@@ -9,6 +10,7 @@ media:
     - png
     - webp
   rename: safe
+
 content:
   - name: homepage
     label: Homepage & links
@@ -41,6 +43,7 @@ content:
       - name: youtubeVideos
         label: YouTube latest videos URL
         type: string
+
   - name: photos
     label: Photography
     type: file
@@ -57,12 +60,13 @@ content:
         type: string
         description: Use nature, city, or mood (or add a new category name).
       - name: image
-        label: Image file or URL
+        label: Image URL or uploaded image path
         type: string
         required: true
       - name: alt
         label: Accessibility description
         type: string
+
   - name: videos
     label: Cinematography videos
     type: file
@@ -81,6 +85,7 @@ content:
         label: YouTube video ID
         type: string
         required: true
+
   - name: playlists
     label: Music playlists
     type: file
@@ -102,6 +107,7 @@ content:
         label: YouTube Music playlist ID
         type: string
         required: true
+
   - name: movies
     label: Movie Shelf (AI posters)
     type: file
