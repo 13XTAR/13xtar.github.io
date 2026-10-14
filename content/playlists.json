@@ -1,0 +1,32 @@
+[
+  {
+    "title": "POP",
+    "mood": "Bright / catchy",
+    "description": "For the bright hours",
+    "playlistId": "PLOD8is_cCamE"
+  },
+  {
+    "title": "LOW - FI",
+    "mood": "Focus / mellow",
+    "description": "For deep-focus sessions",
+    "playlistId": "PLSUtcIh9SN-U"
+  },
+  {
+    "title": "ENERGY!",
+    "mood": "Drive / momentum",
+    "description": "For the high-energy hours",
+    "playlistId": "PLBTG4S_mNfxI"
+  },
+  {
+    "title": "DIVINE MUSIC",
+    "mood": "Calm / reflective",
+    "description": "For a quieter headspace",
+    "playlistId": "PLbP5eal9cq6M"
+  },
+  {
+    "title": "RETRO 📼",
+    "mood": "Old-school / nostalgia",
+    "description": "For a trip back in time",
+    "playlistId": "PLT25WEjNYIhw"
+  }
+]
