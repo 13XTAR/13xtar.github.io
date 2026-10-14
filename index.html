@@ -269,5 +269,18 @@ if(blurToggle){blurToggle.addEventListener('click',()=>{
   }
 })();
 </script>
+
+<script>
+/* 13XTAR casual image-save deterrent: this discourages casual saving, not screenshots or direct URLs. */
+document.addEventListener('contextmenu', function (event) {
+  if (event.target.closest('.photo-card, #lightbox, .preview-card')) event.preventDefault();
+});
+document.addEventListener('dragstart', function (event) {
+  if (event.target.closest('img, .photo-card, #lightbox, .preview-card')) event.preventDefault();
+});
+document.querySelectorAll('img').forEach(function (img) {
+  img.setAttribute('draggable', 'false');
+});
+</script>
 </body>
 </html>
