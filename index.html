@@ -87,13 +87,14 @@ html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%
 </div></header>
 <main>
 <section class="hero" id="home">
+<iframe class="hero-video" src="https://www.youtube-nocookie.com/embed/FHvABeF0qqE?autoplay=1&mute=1&controls=1&loop=1&playlist=FHvABeF0qqE&playsinline=1&rel=0&modestbranding=1" title="13XTAR cinematic showreel" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
 <div class="hero-shade"></div>
 <div class="wrap hero-inner">
 <div>
 <div class="eyebrow">13XTAR · VISUALS / MUSIC / STORIES</div>
 <h1 class="brand-signature">13XTAR</h1>
 <p style="letter-spacing:.22em;text-transform:uppercase;font-size:.76rem;color:#eee">Capture · Create · Feel · Explore</p>
-<div class="actions" style="justify-content:center"><a class="btn" href="#explore">Explore the world ↓</a></div>
+<div class="actions" style="justify-content:center"><a class="btn primary" href="https://youtu.be/FHvABeF0qqE" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a><a class="btn" href="#explore">Explore the world ↓</a></div>
 </div>
 </div></section>
 <section class="hero-description"><div class="wrap hero-description-inner">
@@ -120,13 +121,7 @@ html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%
 </div>
 </div></section>
 
-<section class="section" id="films"><div class="wrap">
-<div class="section-head"><div><div class="eyebrow">02 / Moving images</div><h2>On the big screen</h2></div></div>
-<div class="video-grid">
-<article class="video-card"><iframe class="video-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/LXb3EKWsInQ?rel=0" title="Cinematic nature film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><h3>Earth, in slow motion</h3><p class="muted">A cinematic nature sample. Use the YouTube quality menu to choose 4K when available.</p></article>
-<article class="video-card"><iframe class="video-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/ScMzIvxBSi4?rel=0" title="Cinematic video sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><h3>Motion study</h3><p class="muted">A second sample slot for a favourite short film, travel film, or your own public video.</p></article>
-</div>
-</div></section>
+
 
 <section class="section" id="music"><div class="wrap">
 <div class="section-head"><div><div class="eyebrow">03 / Soundtrack</div><h2>The music room</h2></div><span class="pill">5 playlists · YouTube Music</span></div>
@@ -236,12 +231,6 @@ if(blurToggle){blurToggle.addEventListener('click',()=>{
         im.src=card.dataset.full; im.alt=card.querySelector('img')?.alt||''; lb.classList.add('open');
       }));
     }
-    const videoGrid = document.querySelector('#films .video-grid');
-    if (videoGrid && Array.isArray(videos)) videoGrid.innerHTML = videos.map(v=>{
-      const id=videoId(v.youtubeId); if(!id) return '';
-      return `<article class="video-card"><iframe class="video-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/${id}?rel=0" title="${esc(v.title||'13XTAR video')}" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe><h3>${esc(v.title||'Untitled video')}</h3><p class="muted">${esc(v.description||'')}</p></article>`;
-    }).join('') || '<div class="empty-shelf">Add your cinematic videos in Pages CMS.</div>';
-
     const musicGrid = document.querySelector('#music .music-grid');
     if (musicGrid && Array.isArray(playlists)) musicGrid.innerHTML = playlists.map((p,i)=>{
       const id=String(p.playlistId||'').replace(/[^A-Za-z0-9_-]/g,''); if(!id) return '';
