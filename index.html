@@ -87,14 +87,13 @@ html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%
 </div></header>
 <main>
 <section class="hero" id="home">
-<iframe class="hero-video" src="https://www.youtube-nocookie.com/embed/FHvABeF0qqE?autoplay=1&mute=1&controls=1&loop=1&playlist=FHvABeF0qqE&playsinline=1&rel=0&modestbranding=1" title="13XTAR cinematic showreel" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
 <div class="hero-shade"></div>
 <div class="wrap hero-inner">
 <div>
 <div class="eyebrow">13XTAR · VISUALS / MUSIC / STORIES</div>
 <h1 class="brand-signature">13XTAR</h1>
 <p style="letter-spacing:.22em;text-transform:uppercase;font-size:.76rem;color:#eee">Capture · Create · Feel · Explore</p>
-<div class="actions" style="justify-content:center"><a class="btn primary" href="https://youtu.be/FHvABeF0qqE" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a><a class="btn" href="#explore">Explore the world ↓</a></div>
+<div class="actions" style="justify-content:center"><a class="btn" href="#explore">Explore the world ↓</a></div>
 </div>
 </div></section>
 <section class="hero-description"><div class="wrap hero-description-inner">
@@ -214,13 +213,6 @@ if(blurToggle){blurToggle.addEventListener('click',()=>{
     ]);
     if (site.heroTitle) document.querySelector('.hero-description h2').textContent = site.heroTitle;
     if (site.heroDescription) document.querySelector('.hero-description .wrap > div:nth-child(2) p').textContent = site.heroDescription;
-    const heroFrame = document.querySelector('.hero-video');
-    if (heroFrame && site.heroVideoUrl) {
-      let id = '';
-      try { const u = new URL(site.heroVideoUrl); if (u.hostname.includes('youtu.be')) id = u.pathname.slice(1); else id = u.searchParams.get('v') || (u.pathname.match(/\/embed\/([^/]+)/)||[])[1] || ''; } catch(e) {}
-      id = videoId(id);
-      if (id) heroFrame.src = 'https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&controls=1&loop=1&playlist='+id+'&playsinline=1&rel=0&modestbranding=1';
-    }
     const channelLink = document.querySelector('.hero-description a[href*="youtube.com/@13xtar"]');
     if (channelLink && site.youtubeChannel) channelLink.href = safeURL(site.youtubeChannel) || channelLink.href;
     const socialLinks = [...document.querySelectorAll('#social a')];
