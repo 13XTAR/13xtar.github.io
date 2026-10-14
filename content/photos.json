@@ -1,0 +1,38 @@
+[
+  {
+    "title": "STILLNESS1",
+    "category": "nature",
+    "imageUrl": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=85",
+    "alt": "Mountain lake and dramatic alpine landscape"
+  },
+  {
+    "title": "AFTER HOURS",
+    "category": "city",
+    "imageUrl": "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=88",
+    "alt": "City skyline after dark"
+  },
+  {
+    "title": "COSMIC",
+    "category": "mood",
+    "imageUrl": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=88",
+    "alt": "Starry night over mountains"
+  },
+  {
+    "title": "THE QUIET",
+    "category": "nature",
+    "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=88",
+    "alt": "Sunlight through a forest"
+  },
+  {
+    "title": "NEON DAYS",
+    "category": "city",
+    "imageUrl": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=88",
+    "alt": "Night city buildings"
+  },
+  {
+    "title": "SOFT FOCUS",
+    "category": "mood",
+    "imageUrl": "https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1200&q=88",
+    "alt": "Minimal green plant in soft light"
+  }
+]
