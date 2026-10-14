@@ -1,0 +1,131 @@
+media:
+  input: assets/uploads
+  output: /assets/uploads
+  categories:
+    - image
+  extensions:
+    - jpg
+    - jpeg
+    - png
+    - webp
+  rename: safe
+content:
+  - name: homepage
+    label: Homepage & links
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: siteName
+        label: Site name
+        type: string
+      - name: heroVideoUrl
+        label: Hero YouTube video URL
+        type: string
+        description: Paste a YouTube video link. Use a video you own or have permission to feature.
+      - name: heroTitle
+        label: Homepage headline
+        type: string
+      - name: heroDescription
+        label: Description under the hero
+        type: text
+      - name: photographyInstagram
+        label: Photography Instagram URL
+        type: string
+      - name: cinematicsInstagram
+        label: Cinematics Instagram URL
+        type: string
+      - name: youtubeChannel
+        label: YouTube channel URL
+        type: string
+      - name: youtubeVideos
+        label: YouTube latest videos URL
+        type: string
+  - name: photos
+    label: Photography
+    type: file
+    path: content/photos.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Caption
+        type: string
+        required: true
+      - name: category
+        label: Filter category
+        type: string
+        description: Use nature, city, or mood (or add a new category name).
+      - name: image
+        label: Image file or URL
+        type: image
+        required: true
+      - name: alt
+        label: Accessibility description
+        type: string
+  - name: videos
+    label: Cinematography videos
+    type: file
+    path: content/videos.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Video title
+        type: string
+        required: true
+      - name: description
+        label: Short description
+        type: text
+      - name: youtubeId
+        label: YouTube video ID
+        type: string
+        required: true
+  - name: playlists
+    label: Music playlists
+    type: file
+    path: content/playlists.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Playlist name
+        type: string
+        required: true
+      - name: mood
+        label: Mood label
+        type: string
+      - name: description
+        label: Short description
+        type: text
+      - name: playlistId
+        label: YouTube Music playlist ID
+        type: string
+        required: true
+  - name: movies
+    label: Movie Shelf (AI posters)
+    type: file
+    path: content/movies.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Movie title
+        type: string
+        required: true
+      - name: year
+        label: Release year
+        type: string
+      - name: genre
+        label: Genre
+        type: string
+      - name: description
+        label: Poster mood / short note for AI
+        type: text
+        description: Describe the atmosphere you want. AI creates original artwork, not an official studio poster.
+      - name: rating
+        label: Your rating (optional)
+        type: string
+      - name: poster
+        label: Poster artwork (leave blank for automatic AI generation)
+        type: image
