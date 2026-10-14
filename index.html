@@ -205,7 +205,6 @@ if(blurToggle){blurToggle.addEventListener('click',()=>{
 (async function loadEditableContent(){
   const getJSON = async (file) => { const r = await fetch(file, {cache:'no-store'}); if (!r.ok) throw new Error('Could not load '+file); return r.json(); };
   const esc = (v='') => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const img = safeURL(p.imageUrl || p.image); if (!img) return '';
   const videoId = (v='') => /^[A-Za-z0-9_-]{6,20}$/.test(String(v)) ? String(v) : '';
   try {
     const [site, photos, videos, playlists, movies] = await Promise.all([
@@ -231,7 +230,7 @@ if(blurToggle){blurToggle.addEventListener('click',()=>{
     const photoGrid = document.getElementById('photoGrid');
     if (photoGrid && Array.isArray(photos)) {
       photoGrid.innerHTML = photos.map((p,i)=>{
-        const img = safeURL(p.image); if (!img) return '';
+        const img = safeURL(p.imageUrl || p.image); if (!img) return '';
         return `<div class="photo-card" data-category="${esc((p.category||'mood').toLowerCase())}" data-full="${esc(img)}"><img loading="lazy" src="${esc(img)}" alt="${esc(p.alt||p.title||'13XTAR photograph')}"><span>${String(i+1).padStart(2,'0')} — ${esc(p.title||'UNTITLED')}</span><small class="brand-signature" style="position:absolute;left:0;right:0;top:48%;text-align:center;font-size:.58rem;letter-spacing:.22em;opacity:.72;pointer-events:none">13XTAR</small></div>`;
       }).join('') || '<div class="empty-shelf">Your photo journal is ready for your first image.</div>';
       const currentFilters = [...document.querySelectorAll('.filter')];
