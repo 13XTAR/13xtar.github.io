@@ -79,11 +79,21 @@ html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
+
+<style id="shorts-gallery-style">
+.shorts-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.short-card{min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.short-frame{display:block;width:100%;aspect-ratio:9/16;border:0;background:#000}
+.short-copy{padding:12px 13px 14px}.short-copy h3{margin:0 0 5px;font-size:.88rem;letter-spacing:.04em}.short-copy a{font-size:.76rem;color:var(--accent)}
+@media(max-width:760px){.shorts-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+@media(max-width:380px){.shorts-grid{grid-template-columns:1fr;max-width:300px;margin:auto}}
+</style>
+
 </head>
 <body>
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="#home">13XTAR<span style="color:var(--accent)">.</span></a>
-<nav class="navlinks" aria-label="Main navigation"><a href="#photos">PHOTOS</a><a href="#films">FILMS</a><a href="#music">MUSIC</a><a href="#cinema">CINEMA</a><a href="#social">UPDATES</a><a href="#about">ABOUT</a><button class="blur-toggle" id="blurToggle" type="button" aria-pressed="false">Blur mode <span class="toggle-dot" aria-hidden="true"></span><span id="blurStatus">OFF</span></button></nav>
+<nav class="navlinks" aria-label="Main navigation"><a href="#photos">PHOTOS</a><a href="#shorts">SHORTS</a><a href="#music">MUSIC</a><a href="#cinema">CINEMA</a><a href="#social">UPDATES</a><a href="#about">ABOUT</a><button class="blur-toggle" id="blurToggle" type="button" aria-pressed="false">Blur mode <span class="toggle-dot" aria-hidden="true"></span><span id="blurStatus">OFF</span></button></nav>
 </div></header>
 <main>
 <section class="hero" id="home">
@@ -122,6 +132,17 @@ html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%
 </div></section>
 
 
+
+
+<section class="section" id="shorts"><div class="wrap">
+<div class="section-head"><div><div class="eyebrow">02 / Vertical films</div><h2>Shorts, in motion.</h2></div><span class="pill">From the 13XTAR channel</span></div>
+<div class="shorts-grid">
+<article class="short-card"><iframe class="short-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/Tfdytp25aC4" title="13XTAR YouTube Short 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="short-copy"><h3>SHORT 01</h3><a href="https://youtube.com/shorts/Tfdytp25aC4" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></article>
+<article class="short-card"><iframe class="short-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/P-rrTYd67Ts" title="13XTAR YouTube Short 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="short-copy"><h3>SHORT 02</h3><a href="https://youtube.com/shorts/P-rrTYd67Ts" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></article>
+<article class="short-card"><iframe class="short-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/sJTyT6m1oAI" title="13XTAR YouTube Short 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="short-copy"><h3>SHORT 03</h3><a href="https://youtube.com/shorts/sJTyT6m1oAI" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></article>
+<article class="short-card"><iframe class="short-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/Yg7lCu5vXH4" title="13XTAR YouTube Short 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="short-copy"><h3>SHORT 04</h3><a href="https://youtube.com/shorts/Yg7lCu5vXH4" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></article>
+</div>
+</div></section>
 
 <section class="section" id="music"><div class="wrap">
 <div class="section-head"><div><div class="eyebrow">03 / Soundtrack</div><h2>The music room</h2></div><span class="pill">5 playlists · YouTube Music</span></div>
