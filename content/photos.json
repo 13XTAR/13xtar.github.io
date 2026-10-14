@@ -1,14 +1,11 @@
 [
   {
-    "title": "STIL",
+    "title": "Sunset",
     "category": "nature",
-    "imageUrl": "https://i.imgur.com/WC9gEee.jpeg",
-    "alt": "Mountain lake and dramatic alpine landscape"
+    "imageUrl": "https://i.imgur.com/WC9gEee.jpeg"
   },
   {
-    "title": "AFTER HOURS",
-    "category": "city",
-    "imageUrl": "https://i.imgur.com/WC9gEee.jpeg",
-    "alt": "City skyline after dark"
+    "title": "Khajrana",
+    "imageUrl": "https://i.imgur.com/fTN0EL2.jpeg"
   }
 ]
