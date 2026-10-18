@@ -35,9 +35,63 @@ $('pdf').onchange=()=>{const f=$('pdf').files[0];$('extract').disabled=!f;if(f){
 function norm(s){return s.replace(/[\u00a0\t]+/g,' ').replace(/[०-९]/g,d=>'०१२३४५६७८९'.indexOf(d)).replace(/\r/g,'\n')}
 async function extractPdf(){const f=$('pdf').files[0];if(!f)return;const btn=$('extract');btn.disabled=true;$('reviewPanel').classList.add('hide');$('workProgress').style.width='0%';try{if(!window.pdfjsLib)throw Error('PDF reader could not load. Check internet and reload.');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const doc=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;let start=Math.max(1,parseInt($('startPage').value)||1),end=parseInt($('endPage').value)||doc.numPages;end=Math.min(doc.numPages,end);start=Math.min(start,end);rawText='';for(let n=start;n<=end;n++){const page=await doc.getPage(n),tc=await page.getTextContent();const rows=new Map();for(const item of tc.items){const y=Math.round(item.transform?.[5]||0);if(!rows.has(y))rows.set(y,[]);rows.get(y).push(item.str)}let text=[...rows.entries()].sort((a,b)=>b[0]-a[0]).map(([,parts])=>parts.join(' ').replace(/\s+/g,' ').trim()).filter(Boolean).join('\n');if(text.length<35&&$('ocr').checked){setStatus('Page '+n+'/'+end+': scanned page detected; loading Hindi + English OCR…');const vp=page.getViewport({scale:1.65}),canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');canvas.width=Math.ceil(vp.width);canvas.height=Math.ceil(vp.height);await page.render({canvasContext:ctx,viewport:vp}).promise;try{if(!ocrWorker){ocrWorker=await Tesseract.createWorker('hin+eng',1,{logger:m=>{if(m.status==='recognizing text')setStatus('OCR running… '+Math.round((m.progress||0)*100)+'%')}})}const result=await ocrWorker.recognize(canvas);text=result.data.text||''}catch(ocrErr){text='[OCR failed on page '+n+': '+ocrErr.message+']';}canvas.width=1;canvas.height=1;}rawText+='\n\n--- PAGE '+n+' ---\n'+text;const pct=100*(n-start+1)/(end-start+1);$('workProgress').style.width=pct+'%';setStatus('Processed page '+n+' of '+end+' ('+Math.round(pct)+'%).')}if(!rawText.trim())throw Error('No text was extracted.');$('raw').value=rawText.trim();draft=parseQuestions(rawText,$('chapter').value||f.name);$('reviewPanel').classList.remove('hide');renderReview();setStatus('Extraction complete. Detected '+draft.length+' possible questions. Review before saving.');$('reviewPanel').scrollIntoView({behavior:'smooth'});}catch(e){setStatus('Could not read PDF: '+e.message)}finally{btn.disabled=false}}
 $('extract').onclick=extractPdf;
-function parseQuestions(text,chapter){text=norm(text).replace(/--- PAGE \d+ ---/g,'\n');const lines=text.split(/\n+/).map(x=>x.trim()).filter(Boolean);const starts=[];const qStart=/^(?:(?:प्रश्न|प्रश्‍न|Q(?:uestion)?)[\s.:#-]*)?(\d{1,4})\s*[.)।:-]\s*(\S.*)$/i;for(let i=0;i<lines.length;i++){if(qStart.test(lines[i])&&lines[i].length>8)starts.push(i)}if(starts.length<2){for(let i=0;i<lines.length;i++){if(/^(?:प्रश्न|प्रश्‍न|Q(?:uestion)?)[\s.:#-]*\d+/i.test(lines[i]))starts.push(i)}}let chunks=[];for(let j=0;j<starts.length;j++){let part=lines.slice(starts[j],starts[j+1]??lines.length);if(part.join(' ').length>25)chunks.push(part)}let out=[];for(const c of chunks){let stem=[],opts=[],curOpt=-1;for(let line of c){let m=line.match(/^\s*(?:\(?\s*([A-Da-d])\s*\)?|\(?\s*([अआबभसदकखगघ])\s*\)?|\(?\s*([1-4])\s*\)?)[.)।:-]?\s+(.+)$/);if(m){let ix=m[1]?m[1].toUpperCase().charCodeAt(0)-65:m[2]?({'अ':0,'आ':0,'ब':1,'भ':1,'स':2,'द':3,'क':0,'ख':1,'ग':2,'घ':3}[m[2]]):Number(m[3])-1;if(ix>=0&&ix<4){if(!opts[ix])opts[ix]='';opts[ix]+=(opts[ix]?' ':'')+m[4];curOpt=ix;continue}}if(curOpt>=0&&opts[curOpt]&& !/^(?:उत्तर|व्याख्या|हल|ans(?:wer)?|solution)\s*[:：]/i.test(line)){opts[curOpt]+=' '+line}else if(opts.some(Boolean)&&/^(?:उत्तर|व्याख्या|हल|ans(?:wer)?|solution)\s*[:：]/i.test(line)){}else if(!opts.some(Boolean))stem.push(line);else if(curOpt<0)stem.push(line)}
-let q=stem.join(' ').replace(qStart,'$2').replace(/^\d{1,4}\s*[.)।:-]\s*/,'').trim();opts=opts.map(x=>(x||'').trim());if(q.length>8&&opts.filter(x=>x.length>0).length>=2){out.push({id:uid(),chapter,set:chapter,q,o:opts.filter(x=>x.length>0).slice(0,4),a:-1,verified:false,why:'Answer not confirmed. Check the answer key in the original book.',bookmark:false})}}
-return out}
+function parseQuestions(text,chapter){
+  text=norm(text).replace(/--- PAGE \d+ ---/g,'\n');
+  // Split inline choices onto their own lines before detecting question blocks.
+  text=text.replace(/[ \t]+(?=(?:\([A-Da-d]\)|[A-Da-d][.)]|[1-4][.)]|\([1-4]\)|[कखगघ][.)]|[कखगघ][।):-])\s+)/g,'\n');
+  const lines=text.split(/\n+/).map(x=>x.replace(/\s+/g,' ').trim()).filter(Boolean);
+  const starts=[];
+  const qStart=/^(?:(?:प्रश्न|प्रश्‍न|प्रश्न क्रमांक|Q(?:uestion)?(?:\s*No\.?)?)[\s.:#-]*)?(\d{1,4})\s*[.)।:-]\s*(\S.*)$/i;
+  for(let i=0;i<lines.length;i++){
+    if(qStart.test(lines[i]) && lines[i].length>8) starts.push(i);
+  }
+  // Alternate print styles: "प्रश्न 12 ..." without punctuation after the number.
+  if(starts.length<2){
+    for(let i=0;i<lines.length;i++){
+      if(/^(?:प्रश्न|प्रश्‍न|Q(?:uestion)?)(?:\s*No\.?)?[\s.:#-]*\d+\b/i.test(lines[i])) starts.push(i);
+    }
+  }
+  const uniqueStarts=[...new Set(starts)].sort((a,b)=>a-b);
+  const blocks=[];
+  for(let j=0;j<uniqueStarts.length;j++){
+    const part=lines.slice(uniqueStarts[j],uniqueStarts[j+1]??lines.length);
+    if(part.join(' ').length>25) blocks.push(part);
+  }
+  const out=[];
+  const optionMatch=/^\s*(?:\(?\s*([A-D])\s*\)?|([1-4])|([कखगघ])|([अआबभसद])|([①②③④]))\s*[.)।:-]?\s+(.+)$/i;
+  const hindiMap={'क':0,'ख':1,'ग':2,'घ':3,'अ':0,'आ':1,'ब':1,'भ':1,'स':2,'द':3,'①':0,'②':1,'③':2,'④':3};
+  for(const block of blocks){
+    let stem=[],opts=['','','',''],curOpt=-1;
+    for(let line of block){
+      const m=line.match(optionMatch);
+      if(m){
+        let ix=-1;
+        if(m[1]) ix=m[1].toUpperCase().charCodeAt(0)-65;
+        else if(m[2]) ix=Number(m[2])-1;
+        else if(m[3]) ix=hindiMap[m[3]];
+        else if(m[4]) ix=hindiMap[m[4]];
+        else if(m[5]) ix=hindiMap[m[5]];
+        if(ix>=0&&ix<4){
+          opts[ix]=(opts[ix] ? opts[ix]+' ' : '')+m[6].trim();
+          curOpt=ix;
+          continue;
+        }
+      }
+      if(/^(?:उत्तर\s*माला|उत्तरमाला|उत्तर\s*सूची|answer\s*key|व्याख्या|हल|solution)\b/i.test(line)) continue;
+      if(curOpt>=0 && opts[curOpt]) opts[curOpt]+=' '+line;
+      else stem.push(line);
+    }
+    let q=stem.join(' ').replace(qStart,'$2').replace(/^(?:प्रश्न|प्रश्‍न|Q(?:uestion)?)(?:\s*No\.?)?[\s.:#-]*/i,'').replace(/^\d{1,4}\s*[.)।:-]\s*/,'').trim();
+    opts=opts.map(x=>x.trim());
+    const filled=opts.filter(Boolean).length;
+    if(q.length>8&&filled>=2){
+      out.push({id:uid(),chapter,set:chapter,q,o:opts,a:-1,verified:false,why:'Answer not confirmed. Check the answer key in the original book.',bookmark:false});
+    }
+  }
+  // Remove duplicate question stems caused by page headers or repeated numbering.
+  const seen=new Set();
+  return out.filter(q=>{const k=q.q.toLocaleLowerCase().replace(/[^\p{L}\p{N}]+/gu,'');if(!k||seen.has(k))return false;seen.add(k);return true});
+}
 $('parseAgain').onclick=()=>{draft=parseQuestions($('raw').value,$('chapter').value||'Unsorted');renderReview();setStatus('Detected '+draft.length+' possible questions. Check the result carefully.')};
 $('addQuestion').onclick=()=>{draft.push({id:uid(),chapter:$('chapter').value||'Unsorted',q:'',o:['','','',''],a:-1,verified:false,why:'',bookmark:false});renderReview();document.getElementById('r'+(draft.length-1))?.scrollIntoView({behavior:'smooth'})};
 function renderReview(){const box=$('reviewList');box.innerHTML='';$('foundCount').textContent=draft.length+' detected';draft.forEach((q,i)=>{const d=document.createElement('div');d.className='question';d.id='r'+i;d.innerHTML='<div class="row" style="justify-content:space-between"><div class="qtitle">Question '+(i+1)+'</div><button class="danger" data-remove="'+i+'">Remove</button></div><label>Question text</label><textarea data-q="'+i+'" style="min-height:75px">'+esc(q.q)+'</textarea><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">'+[0,1,2,3].map(k=>'<div><label>Option '+String.fromCharCode(65+k)+'</label><input type="text" data-o="'+i+'-'+k+'" value="'+esc(q.o[k]||'')+'"></div>').join('')+'</div><label>Correct answer</label><select data-a="'+i+'"><option value="-1">Not verified / unknown</option>'+[0,1,2,3].map(k=>'<option value="'+k+'" '+(q.a===k?'selected':'')+'>Option '+String.fromCharCode(65+k)+'</option>').join('')+'</select><label>Chapter / topic</label><input type="text" data-c="'+i+'" value="'+esc(q.chapter||$('chapter').value||'Unsorted')+'"><label>Explanation / source note (optional)</label><input type="text" data-w="'+i+'" value="'+esc(q.why||'')+'"><label class="checkline"><input type="checkbox" data-v="'+i+'" '+(q.verified?'checked':'')+'> I verified this question and its answer against the book</label>';box.appendChild(d)});box.querySelectorAll('[data-q]').forEach(el=>el.onchange=()=>draft[+el.dataset.q].q=el.value);box.querySelectorAll('[data-o]').forEach(el=>el.onchange=()=>{let [i,k]=el.dataset.o.split('-').map(Number);draft[i].o[k]=el.value});box.querySelectorAll('[data-a]').forEach(el=>el.onchange=()=>{draft[+el.dataset.a].a=+el.value;draft[+el.dataset.a].verified=+el.value>=0});box.querySelectorAll('[data-c]').forEach(el=>el.onchange=()=>draft[+el.dataset.c].chapter=el.value);box.querySelectorAll('[data-w]').forEach(el=>el.onchange=()=>draft[+el.dataset.w].why=el.value);box.querySelectorAll('[data-v]').forEach(el=>el.onchange=()=>draft[+el.dataset.v].verified=el.checked);box.querySelectorAll('[data-remove]').forEach(el=>el.onclick=()=>{draft.splice(+el.dataset.remove,1);renderReview()})}
