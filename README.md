@@ -5,18 +5,20 @@ A mobile-first, dark cinematic portfolio for GitHub Pages, with a phone-friendly
 ## What is included
 - Cinematic YouTube hero using the supplied video, with muted autoplay/loop requested (browser playback rules still apply).
 - Photography journal with filters, a full-size lightbox, and a subtle 13XTAR signature overlay.
-- Cinematography video embeds, five supplied YouTube Music playlists, mood links, and social profile links.
+- Cinematography film gallery driven by `content/videos.json`, vertical Shorts embeds, five supplied YouTube Music playlists, mood links, and social profile links.
 - Editable JSON content files for the homepage, photos, videos, playlists, and movies.
 - `.pages.yml` configuration for Pages CMS.
 - Optional GitHub Actions workflow that generates original, vertical movie-shelf artwork for entries whose `poster` field is blank.
-- Lightweight responsive layout, Blur Mode OFF by default, and reduced-motion support.
+- Cinematic motion system: animated hero orbit, scrolling marquee, scroll progress, reveal transitions, desktop pointer response, active section navigation, and back-to-top control.
+- Separate photography portfolio with a keyboard-accessible full-size lightbox, branded favicon, custom 404 page, responsive mobile layout, Blur Mode OFF by default, and reduced-motion support.
 
 ## Content editing (Pages CMS)
 The CMS reads `.pages.yml` from the repository root. The website reads the JSON files inside `content/`; the CMS config alone does not render site content.
 
 - `content/site.json`: homepage headline, description, hero video, and social links.
 - `content/photos.json`: photos and their categories.
-- `content/videos.json`: YouTube video IDs and descriptions.
+- `content/videos.json`: YouTube video IDs and descriptions, rendered in the Films & Cinematography section.
+- `content/site.json`: the `heroVideoUrl` field controls the homepage showreel; the hero remains muted and loops when browser autoplay rules allow.
 - `content/playlists.json`: playlist names, moods, and playlist IDs.
 - `content/movies.json`: your Movie Shelf. Add a title, year, genre, and optional poster mood description. Leave `poster` blank to request AI artwork.
 
