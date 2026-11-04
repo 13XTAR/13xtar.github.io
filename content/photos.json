@@ -2,10 +2,15 @@
   {
     "title": "Sunset",
     "category": "nature",
-    "imageUrl": "https://i.imgur.com/WC9gEee.jpeg"
+    "imageUrl": "https://i.imgur.com/WC9gEee.jpeg",
+    "alt": "Sunset photograph from the 13XTAR original photo collection",
+    "description": "A sunset captured and selected for the 13XTAR photo journal."
   },
   {
     "title": "Khajrana",
-    "imageUrl": "https://i.imgur.com/fTN0EL2.jpeg"
+    "category": "mood",
+    "imageUrl": "https://i.imgur.com/fTN0EL2.jpeg",
+    "alt": "Khajrana photograph from the 13XTAR original photo collection",
+    "description": "A photograph titled Khajrana from the 13XTAR original photo collection."
   }
 ]
