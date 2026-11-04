@@ -40,8 +40,11 @@ If no API key is configured, the website still works and the CMS still edits con
 ## Local/preview notes
 The editable content loader uses `fetch()` to read JSON files, so preview it through a web server or after deployment; opening `index.html` directly as a `file://` URL may show the built-in starter content instead.
 
-## Publishing
-Do not enable GitHub Pages until the site is ready. Once you decide to publish, upload the complete extracted folder contents to the repository root, including the hidden `.pages.yml` file and `.github/workflows/generate-movie-posters.yml`, then enable Pages from the `main` branch and `/ (root)`.
+## Deployment
+The project is configured for GitHub Pages from the `main` branch and repository root. New commits trigger the Pages build-and-deployment workflow. If Pages is not enabled, open **Repository Settings → Pages**, choose **Deploy from a branch**, select `main` and `/(root)`, then save.
+
+## Editing the site
+Open Pages CMS, sign in with the GitHub account that has write access to this repository, and select `13XTAR/13xtar.github.io`. Edit the Homepage, Photography, Cinematography videos, Music playlists, or Movie Shelf collections and save the changes. The site reads those JSON files automatically after deployment.
 
 ## Safety and service notes
 - Never commit passwords, personal documents, access tokens, or API keys.
