@@ -84,9 +84,10 @@ content:
         label: Short description
         type: text
       - name: youtubeId
-        label: YouTube video ID
+        label: YouTube video link or ID
         type: string
         required: true
+        description: Paste the full YouTube link (youtube.com/watch?v=... or youtu.be/...) or just its video ID.
 
   - name: playlists
     label: Music playlists
