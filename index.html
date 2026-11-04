@@ -467,7 +467,7 @@ if(blurToggle){blurToggle.addEventListener('click',()=>{
     const movieGrid = document.querySelector('#cinema .movie-grid');
     if (movieGrid && Array.isArray(movies)) movieGrid.innerHTML = movies.length ? movies.map(m=>{
       const poster=safeURL(m.poster);
-      const art=poster ? `<img loading="lazy" alt="Original artwork for ${esc(m.title||'movie')}" src="${esc(poster)}">` : '<div class="poster-empty">ARTWORK<br>GENERATING WHEN<br>AI IS CONNECTED</div>';
+      const art=poster ? `<img loading="lazy" alt="Original artwork for ${esc(m.title||'movie')}" src="${esc(poster)}">` : '<div class="poster-empty">ADD POSTER<br>ARTWORK IN<br>CONTENT EDITOR</div>';
       return `<article class="movie"><div class="poster">${art}<small class="poster-signature">13XTAR</small></div><div class="movie-info"><h3>${esc(m.title||'Untitled movie')}</h3><p>${esc(m.year||'Year not set')}${m.genre?' · '+esc(m.genre):''}</p>${m.rating?`<div class="stars">${esc(m.rating)} <span style="color:var(--muted)">· personal rating</span></div>`:''}</div></article>`;
     }).join('') : '<div class="empty-shelf">Your Movie Shelf is ready. Add a movie in Pages CMS; leave Poster artwork blank and the AI workflow can create original poster art once its API key is configured.</div>';
     /* Keep the brand-first SEO title defined in the document head. */
