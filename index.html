@@ -428,7 +428,7 @@ if(blurToggle){blurToggle.addEventListener('click',()=>{
     const videoGrid=document.getElementById('videoGrid');
     if(videoGrid && Array.isArray(videos)){
       videoGrid.innerHTML=videos.map(v=>{
-        const id=videoId(v.youtubeId||''); if(!id) return '';
+        const id=extractYouTubeId(v.youtubeId||''); if(!id) return '';
         return '<article class="video-card"><iframe class="video-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1" title="'+esc(v.title||'13XTAR film')+'" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><h3>'+esc(v.title||'Untitled film')+'</h3><p>'+esc(v.description||'A film from the 13XTAR collection.')+'</p><a class="btn" href="https://youtu.be/'+id+'" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></article>';
       }).join('') || '<div class="empty-shelf">Add films in the Pages CMS content editor.</div>';
     }
