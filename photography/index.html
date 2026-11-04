@@ -42,10 +42,47 @@ main{padding:clamp(42px,8vw,90px) 0}.eyebrow{color:var(--accent);font-size:.72re
 @media(max-width:650px){.grid{grid-template-columns:1fr;gap:13px}.wrap{width:calc(100% - 28px)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
+
+<style id="13xtar-portfolio-cinematic">
+:root{color-scheme:dark;--acid:#c6ff5e;--accent:var(--acid);--line:rgba(255,255,255,.14)}
+html{scroll-padding-top:80px}
+body{background:radial-gradient(ellipse at 78% 0%,rgba(139,124,255,.12),transparent 36%),#07080b}
+.top{position:sticky;top:0;z-index:20;background:rgba(7,8,11,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.1)}
+.nav{min-height:74px}
+.brand{font-size:.94rem;letter-spacing:.2em}
+.back{border:1px solid var(--line);border-radius:999px;padding:8px 14px;transition:border-color .2s,color .2s}
+.back:hover{border-color:var(--acid);color:var(--acid)}
+main{padding:clamp(54px,9vw,110px) 0 90px}
+.eyebrow{color:var(--acid);font:11px ui-monospace,monospace;letter-spacing:.24em}
+h1{font-size:clamp(3.5rem,11vw,8.6rem);line-height:.88;letter-spacing:-.09em;max-width:1000px;margin:22px 0 24px}
+.intro{max-width:700px;font-size:clamp(1rem,2vw,1.2rem);line-height:1.8}
+.grid{grid-template-columns:1.18fr .82fr;gap:18px;margin:58px 0}
+.photo{border:1px solid rgba(255,255,255,.15);border-radius:4px;cursor:zoom-in;position:relative;transition:transform .45s,border-color .45s,box-shadow .45s}
+.photo:hover{transform:translateY(-6px);border-color:rgba(198,255,94,.55);box-shadow:0 24px 65px rgba(0,0,0,.3)}
+.photo img{aspect-ratio:4/3;filter:saturate(.82) contrast(1.04);transition:transform .8s,filter .8s}
+.photo:hover img{transform:scale(1.025);filter:saturate(1.05) contrast(1.05)}
+.photo figcaption{padding:17px 19px 19px;background:linear-gradient(145deg,#12151b,#0b0c10)}
+.photo h2{font-size:1.16rem;letter-spacing:-.02em}
+.photo p{font-size:.84rem}
+.note{border-radius:4px;border-color:rgba(198,255,94,.24);background:linear-gradient(110deg,rgba(198,255,94,.06),rgba(139,124,255,.04));padding:24px}
+.note strong{color:var(--acid);letter-spacing:.12em}
+footer{border-color:rgba(255,255,255,.12)}
+footer a{color:var(--acid)}
+#portfolioLightbox{position:fixed;inset:0;z-index:100;background:rgba(2,3,5,.94);display:grid;place-items:center;padding:22px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(16px)}
+#portfolioLightbox.open{opacity:1;visibility:visible}
+#portfolioLightbox img{max-width:min(1100px,94vw);max-height:82vh;object-fit:contain;box-shadow:0 24px 100px #000}
+#portfolioLightbox button{position:absolute;right:22px;top:22px;border:1px solid rgba(255,255,255,.3);background:#101218;color:#fff;border-radius:999px;padding:11px 16px;cursor:pointer}
+#portfolioLightbox button:hover{border-color:var(--acid);color:var(--acid)}
+.skip-link{position:fixed;left:12px;top:12px;z-index:1000;padding:10px 14px;background:var(--acid);color:#08090b;transform:translateY(-160%);border-radius:4px;font-weight:800}
+.skip-link:focus{transform:translateY(0)}
+@media(max-width:650px){.wrap{width:calc(100% - 28px)}main{padding:48px 0 65px}h1{font-size:clamp(3.1rem,15vw,5.4rem)}.grid{grid-template-columns:1fr;gap:13px;margin:36px 0}.photo img{aspect-ratio:4/3}.nav{min-height:62px}.back{font-size:.8rem;padding:7px 11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
+<a class="skip-link" href="#portfolio-main">Skip to content</a>
 <header class="top"><div class="wrap nav"><a class="brand" href="/">13XTAR</a><a class="back" href="/">← Back to 13XTAR</a></div></header>
-<main class="wrap">
+<main class="wrap" id="portfolio-main">
 <div class="eyebrow">Selected frames · Original collection</div>
 <h1>Photography by 13XTAR</h1>
 <p class="intro">A growing collection of photographs and visual moments selected for 13XTAR. Explore the frames below and return as new original photographs are added.</p>
@@ -62,5 +99,24 @@ main{padding:clamp(42px,8vw,90px) 0}.eyebrow{color:var(--accent);font-size:.72re
 <div class="note"><strong>13XTAR</strong> is an evolving creative portfolio. This gallery currently features two selected photographs; more original work can be added as the collection grows.</div>
 </main>
 <footer><div class="wrap">© 2026 13XTAR · <a href="/">Official website</a> · <a href="https://instagram.com/13xtar" target="_blank" rel="noopener noreferrer">Photography Instagram</a></div></footer>
+<div id="portfolioLightbox" role="dialog" aria-modal="true" aria-label="Expanded photograph"><button type="button" id="portfolioLightboxClose">Close ✕</button><img id="portfolioLightboxImage" alt=""></div>
+<script id="13xtar-portfolio-interactions">
+(function(){
+ const box=document.getElementById('portfolioLightbox'),image=document.getElementById('portfolioLightboxImage');
+ const close=document.getElementById('portfolioLightboxClose');
+ document.querySelectorAll('.photo img').forEach(img=>{
+  img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label','Open larger view: '+img.alt);
+  const open=()=>{image.src=img.src;image.alt=img.alt;box.classList.add('open');close.focus();};
+  img.addEventListener('click',open);img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+ });
+ const shut=()=>{box.classList.remove('open');image.src='';};
+ close.addEventListener('click',shut);box.addEventListener('click',e=>{if(e.target===box)shut();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')shut();});
+ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.animate([{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'translateY(0)'}],{duration:650,easing:'cubic-bezier(.2,.7,.2,1)',fill:'both'});observer.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.photo,.note').forEach(el=>observer.observe(el));
+ }
+})();
+</script>
 </body>
 </html>
