@@ -86,6 +86,65 @@ body.blur-on .topbar,body.blur-on .music-card,body.blur-on .social-card,body.blu
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
 .poster{position:relative}.poster-signature{position:absolute;left:0;right:0;top:48%;text-align:center;font-size:.64rem;letter-spacing:.24em;font-weight:900;color:rgba(255,255,255,.78);text-shadow:0 2px 14px #000;pointer-events:none}.poster-empty{aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;background:radial-gradient(ellipse at 50% 30%,#29252b,#101117 70%);color:#c8b18f;font-size:.8rem;letter-spacing:.1em}.empty-shelf{grid-column:1/-1;border:1px dashed var(--line);padding:28px;text-align:center;color:var(--muted);border-radius:12px}.cms-note{font-size:.76rem;color:var(--muted);margin-top:14px}
+
+/* 13XTAR experimental cinematic art direction */
+:root{--acid:#c6ff5e;--electric:#8b7cff;--hot:#ff6b4a}
+::selection{background:var(--acid);color:#08090b}
+.topbar{background:rgba(7,8,11,.72);border-bottom:1px solid rgba(255,255,255,.09)}
+.navlinks a{transition:color .25s,border-color .25s,transform .25s}.navlinks a:hover{color:var(--acid);transform:translateY(-2px)}
+.hero{height:min(88vh,900px);min-height:650px;border-bottom:0;isolation:isolate}
+.hero-video{filter:contrast(1.12) saturate(.72);transform:scale(1.38)}
+.hero-shade{background:linear-gradient(90deg,rgba(4,5,8,.72),rgba(4,5,8,.16) 70%),linear-gradient(0deg,#07080b 0%,transparent 38%,rgba(4,5,8,.22))}
+.hero-inner{align-items:center;padding:90px 0 105px}
+.hero .eyebrow,.section .eyebrow{color:var(--acid)}
+.hero .eyebrow{font-size:.68rem;letter-spacing:.32em}
+.hero h1{font-size:clamp(5rem,16vw,13.5rem);line-height:.76;letter-spacing:-.105em;margin:34px 0 32px;text-shadow:0 10px 80px rgba(0,0,0,.5);background:linear-gradient(180deg,#fff 10%,#b9bbc1 65%,#686b73);-webkit-background-clip:text;background-clip:text;color:transparent;position:relative}
+.hero h1:after{content:'®';font-size:clamp(.7rem,1.5vw,1.25rem);letter-spacing:0;color:var(--acid);-webkit-text-fill-color:var(--acid);vertical-align:top;margin-left:12px}
+.hero .actions .btn{border-radius:999px;padding:14px 22px;border-color:rgba(255,255,255,.38);backdrop-filter:blur(12px)}
+.hero .actions .btn.primary{background:var(--acid);border-color:var(--acid);color:#08090b;font-weight:800}
+.hero .actions .btn:hover{transform:translateY(-4px);box-shadow:0 12px 34px rgba(198,255,94,.16)}
+.hero-orbit{position:absolute;z-index:1;pointer-events:none;border:1px solid rgba(198,255,94,.27);border-radius:50%;width:min(58vw,690px);aspect-ratio:1;right:-8%;top:5%;animation:orbitTurn 38s linear infinite}
+.hero-orbit:before,.hero-orbit:after{content:'';position:absolute;border:1px solid rgba(139,124,255,.35);border-radius:50%;inset:12%}
+.hero-orbit:after{inset:28%;border-color:rgba(255,255,255,.16)}
+.orbit-dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--acid);box-shadow:0 0 28px var(--acid);top:18%;left:16%}
+.hero-crosshair{position:absolute;z-index:1;right:9%;bottom:18%;width:100px;height:100px;opacity:.55;pointer-events:none}
+.hero-crosshair:before,.hero-crosshair:after{content:'';position:absolute;background:rgba(255,255,255,.7)}
+.hero-crosshair:before{width:1px;height:100%;left:50%}.hero-crosshair:after{height:1px;width:100%;top:50%}
+.hero-index{position:absolute;z-index:2;left:22px;bottom:28px;color:rgba(255,255,255,.58);font:10px/1.5 ui-monospace,monospace;letter-spacing:.18em}
+.hero-index b{color:var(--acid);font-weight:500}.scroll-cue{position:absolute;z-index:2;right:28px;bottom:28px;color:#d4d4d4;font:10px ui-monospace,monospace;letter-spacing:.2em;writing-mode:vertical-rl}
+.scroll-cue:after{content:'';display:inline-block;width:1px;height:44px;background:var(--acid);margin-top:12px;animation:cue 1.8s ease-in-out infinite}
+@keyframes orbitTurn{to{transform:rotate(360deg)}}@keyframes cue{0%,100%{transform:scaleY(.45);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+.hero-description{padding:55px 0 60px;background:#0a0b0f;border-bottom:1px solid var(--line)}
+.hero-description h2{font-size:clamp(2rem,4.8vw,4.4rem);max-width:680px;letter-spacing:-.065em}
+.section{position:relative;padding:112px 0;border-top:1px solid rgba(255,255,255,.08)}
+.section:before{content:'';position:absolute;top:0;left:0;width:clamp(36px,8vw,110px);height:1px;background:var(--acid);opacity:.8}
+.section-head{margin-bottom:38px}.section h2{font-size:clamp(2.6rem,6vw,5.4rem);letter-spacing:-.075em;line-height:.94;max-width:850px}
+.section-head .pill,.pill{border-color:rgba(198,255,94,.35);color:var(--acid);border-radius:999px}
+.photo-grid{grid-template-columns:1.2fr .8fr;gap:16px}.photo-card{border-radius:3px;aspect-ratio:4/3;background:#121318}
+.photo-card img{filter:saturate(.72) contrast(1.05);transition:transform .9s cubic-bezier(.2,.7,.1,1),filter .7s}
+.photo-card:hover img{filter:saturate(1.08) contrast(1.06);transform:scale(1.055)}
+.photo-card span{font:11px ui-monospace,monospace;letter-spacing:.18em;background:rgba(5,6,8,.48);padding:8px 11px;backdrop-filter:blur(10px)}
+.video-card,.music-card,.music-folder,.movie,.social-card,.update-card{border-radius:3px;background:linear-gradient(145deg,#14161c,#0b0c10);border-color:rgba(255,255,255,.12);transition:transform .4s,border-color .4s,box-shadow .4s}
+.video-card:hover,.music-card:hover,.social-card:hover,.update-card:hover,.movie:hover{transform:translateY(-5px);border-color:rgba(198,255,94,.42);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.filter{border-radius:999px}.filter.active,.filter:hover{border-color:var(--acid);color:var(--acid)}
+.btn{border-radius:999px}.btn.primary{background:var(--acid);border-color:var(--acid);color:#08090b}
+.preview-card{border-radius:3px;border-color:rgba(255,255,255,.14);min-height:190px}
+.preview-card img{filter:brightness(.62) saturate(.7);transition:transform .8s,filter .6s}
+.preview-card:hover img{filter:brightness(.86) saturate(1.1);transform:scale(1.07)}
+.preview-card h3{font-size:1rem;letter-spacing:.17em}
+.mood{border-radius:3px;min-height:105px;transition:transform .3s,border-color .3s}.mood:hover{transform:translateY(-4px);border-color:var(--acid)}
+.footer{border-top:1px solid rgba(255,255,255,.1);padding-top:35px}
+#scrollProgress{position:fixed;z-index:60;left:0;top:0;height:2px;width:0;background:var(--acid);box-shadow:0 0 14px rgba(198,255,94,.8)}
+#ambientGrain{position:fixed;inset:0;z-index:40;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+.reveal-ready .reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal-ready .reveal.in-view{opacity:1;transform:translateY(0)}
+.marquee-band{overflow:hidden;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);background:#0b0c10;padding:18px 0}
+.marquee-track{display:flex;width:max-content;animation:marquee 32s linear infinite;gap:28px;color:#b9bbc1;font:11px ui-monospace,monospace;letter-spacing:.24em}
+.marquee-track span{white-space:nowrap}.marquee-track b{color:var(--acid);font-weight:500}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@media(max-width:760px){.hero{height:76svh;min-height:540px}.hero-video{transform:scale(1.7)}.hero-inner{padding:50px 0 75px}.hero h1{font-size:clamp(4.2rem,21vw,7rem);margin:25px 0}.hero-orbit{width:88vw;right:-35%;top:8%;opacity:.65}.hero-crosshair{right:6%;bottom:16%;width:60px;height:60px}.hero-index{left:14px;bottom:17px}.scroll-cue{right:14px;bottom:17px}.section{padding:72px 0}.section h2{font-size:clamp(2.5rem,12vw,4rem)}.photo-grid{grid-template-columns:1fr;gap:10px}.photo-card{aspect-ratio:4/3}.hero-description{padding:42px 0}.preview-card{min-height:140px}}
+@media(prefers-reduced-motion:reduce){.hero-orbit,.scroll-cue:after,.marquee-track{animation:none!important}.reveal-ready .reveal{opacity:1;transform:none;transition:none}}
+
 </style>
 
 <style id="mobile-polish">
@@ -119,6 +178,7 @@ html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%
 
 </head>
 <body>
+<div id="scrollProgress" aria-hidden="true"></div><div id="ambientGrain" aria-hidden="true"></div>
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="#home">13XTAR<span style="color:var(--accent)">.</span></a>
 <nav class="navlinks" aria-label="Main navigation"><a href="#photos">PHOTOS</a><a href="/photography/">PORTFOLIO</a><a href="#shorts">SHORTS</a><a href="#music">MUSIC</a><a href="#cinema">CINEMA</a><a href="#social">UPDATES</a><a href="#about">ABOUT</a><button class="blur-toggle" id="blurToggle" type="button" aria-pressed="false">Blur mode <span class="toggle-dot" aria-hidden="true"></span><span id="blurStatus">OFF</span></button></nav>
@@ -126,7 +186,7 @@ html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%
 <main>
 <section class="hero" id="home">
 <iframe class="hero-video" src="https://www.youtube-nocookie.com/embed/FHvABeF0qqE?autoplay=1&mute=1&controls=1&loop=1&playlist=FHvABeF0qqE&playsinline=1&rel=0&modestbranding=1" title="13XTAR cinematic showreel" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-<div class="hero-shade"></div>
+<div class="hero-orbit" aria-hidden="true"><i class="orbit-dot"></i></div><div class="hero-crosshair" aria-hidden="true"></div><div class="hero-index"><b>13 / 01</b><br>INDEPENDENT VISUAL UNIVERSE</div><div class="scroll-cue">SCROLL TO EXPLORE</div><div class="hero-shade"></div>
 <div class="wrap hero-inner">
 <div>
 <div class="eyebrow">13XTAR · VISUALS / MUSIC / STORIES</div>
@@ -135,6 +195,7 @@ html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%
 <div class="actions" style="justify-content:center"><a class="btn primary" href="https://youtu.be/FHvABeF0qqE" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a><a class="btn" href="#explore">Explore the world ↓</a></div>
 </div>
 </div></section>
+<div class="marquee-band" aria-hidden="true"><div class="marquee-track"><span>13XTAR <b>✳</b> PHOTOGRAPHY <b>✳</b> CINEMATIC FRAMES <b>✳</b> MOVING IMAGE <b>✳</b> SOUND & STORIES <b>✳</b> 13XTAR <b>✳</b> PHOTOGRAPHY <b>✳</b> CINEMATIC FRAMES <b>✳</b> MOVING IMAGE <b>✳</b> SOUND & STORIES <b>✳</b></span><span>13XTAR <b>✳</b> PHOTOGRAPHY <b>✳</b> CINEMATIC FRAMES <b>✳</b> MOVING IMAGE <b>✳</b> SOUND & STORIES <b>✳</b> 13XTAR <b>✳</b> PHOTOGRAPHY <b>✳</b> CINEMATIC FRAMES <b>✳</b> MOVING IMAGE <b>✳</b> SOUND & STORIES <b>✳</b></span></div></div>
 <section class="hero-description"><div class="wrap hero-description-inner">
 <div><div class="eyebrow">The world through my lens</div><h2>Photography, films and visual stories.</h2></div>
 <div><p>Welcome to 13XTAR, the official creative space for original photography, cinematic visual stories, short films, music for every mood and movie discoveries. Explore selected photographs and creative work from the 13XTAR collection.</p><div class="actions"><a class="btn" href="https://youtube.com/@13xtar" target="_blank" rel="noopener noreferrer">Visit my channel ↗</a></div></div>
@@ -307,6 +368,24 @@ document.addEventListener('dragstart', function (event) {
 document.querySelectorAll('img').forEach(function (img) {
   img.setAttribute('draggable', 'false');
 });
+</script>
+<script>
+(function(){
+ const bar=document.getElementById('scrollProgress');let ticking=false;
+ function progress(){const max=document.documentElement.scrollHeight-innerHeight;bar.style.width=(max>0?(scrollY/max)*100:0)+'%';ticking=false;}
+ addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(progress);ticking=true;}},{passive:true});progress();
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.body.classList.add('reveal-ready');
+  document.querySelectorAll('.section,.hero-description,.preview-grid,.hero .eyebrow,.hero h1,.hero .actions').forEach(el=>el.classList.add('reveal'));
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in-view');observer.unobserve(entry.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  const hero=document.querySelector('.hero');
+  if(hero&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+   hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5,orbit=hero.querySelector('.hero-orbit');if(orbit)orbit.style.translate=(x*16)+'px '+(y*12)+'px';});
+   hero.addEventListener('pointerleave',()=>{const orbit=hero.querySelector('.hero-orbit');if(orbit)orbit.style.translate='0 0';});
+  }
+ }
+})();
 </script>
 </body>
 </html>
