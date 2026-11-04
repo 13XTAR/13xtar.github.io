@@ -64,7 +64,7 @@ content:
       - name: imageUrl
         label: External image URL (Unsplash)
         type: string
-        description: Paste a direct https://images.unsplash.com/... image URL for temporary demo photos.
+        description: Paste a direct HTTPS image URL, or upload a photo using the image field.
       - name: alt
         label: Accessibility description
         type: string
@@ -130,10 +130,10 @@ content:
       - name: description
         label: Poster mood / short note for AI
         type: text
-        description: Describe the atmosphere you want. AI creates original artwork, not an official studio poster.
+        description: Describe the atmosphere for original artwork. Blank posters are generated only when the GitHub Actions workflow and OPENAI_API_KEY secret are configured.
       - name: rating
         label: Your rating (optional)
         type: string
       - name: poster
-        label: Poster artwork (leave blank for automatic AI generation)
+        label: Poster artwork (optional; workflow needs an API key)
         type: image
