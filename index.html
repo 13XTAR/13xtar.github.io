@@ -248,13 +248,23 @@ body{background:#07080b}
  #backToTop,.navlinks a:after{transition:none}
 }
 </style>
+
+<style id="13xtar-films-layout">
+#films .video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#films .video-card{min-width:0;overflow:hidden}
+#films .video-frame{display:block;width:100%;aspect-ratio:16/9;height:auto;background:#000}
+#films .video-card h3{font-size:1.05rem;margin:14px 0 4px}
+#films .video-card p{font-size:.86rem;color:var(--muted);min-height:2.8em}
+#films .video-card .btn{margin-bottom:4px}
+@media(max-width:760px){#films .video-grid{grid-template-columns:1fr;gap:12px}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
 <div id="scrollProgress" aria-hidden="true"></div><div id="ambientGrain" aria-hidden="true"></div>
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="#home">13XTAR<span style="color:var(--accent)">.</span></a>
-<nav class="navlinks" aria-label="Main navigation"><a href="#photos">PHOTOS</a><a href="/photography/">PORTFOLIO</a><a href="#shorts">SHORTS</a><a href="#music">MUSIC</a><a href="#cinema">CINEMA</a><a href="#social">UPDATES</a><a href="#about">ABOUT</a><button class="blur-toggle" id="blurToggle" type="button" aria-pressed="false">Blur mode <span class="toggle-dot" aria-hidden="true"></span><span id="blurStatus">OFF</span></button></nav>
+<nav class="navlinks" aria-label="Main navigation"><a href="#photos">PHOTOS</a><a href="/photography/">PORTFOLIO</a><a href="#shorts">SHORTS</a><a href="#films">FILMS</a><a href="#music">MUSIC</a><a href="#cinema">CINEMA</a><a href="#social">UPDATES</a><a href="#about">ABOUT</a><button class="blur-toggle" id="blurToggle" type="button" aria-pressed="false">Blur mode <span class="toggle-dot" aria-hidden="true"></span><span id="blurStatus">OFF</span></button></nav>
 </div></header>
 <main id="main-content">
 <section class="hero" id="home">
@@ -299,11 +309,20 @@ body{background:#07080b}
 <article class="short-card"><iframe class="short-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/P-rrTYd67Ts" title="13XTAR YouTube Short 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="short-copy"><h3>SHORT 02</h3><a href="https://youtube.com/shorts/P-rrTYd67Ts" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></article>
 <article class="short-card"><iframe class="short-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/sJTyT6m1oAI" title="13XTAR YouTube Short 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="short-copy"><h3>SHORT 03</h3><a href="https://youtube.com/shorts/sJTyT6m1oAI" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></article>
 <article class="short-card"><iframe class="short-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/Yg7lCu5vXH4" title="13XTAR YouTube Short 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="short-copy"><h3>SHORT 04</h3><a href="https://youtube.com/shorts/Yg7lCu5vXH4" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></article>
+
+</div>
+</div></section>
+
+<section class="section" id="films"><div class="wrap">
+<div class="section-head"><div><div class="eyebrow">03 / Moving image</div><h2>Films & cinematography.</h2></div><span class="pill">Curated video collection</span></div>
+<p class="music-intro">Selected films, visual experiments and cinematic stories. The collection can be updated from the content editor.</p>
+<div class="video-grid" id="videoGrid">
+<article class="video-card"><div class="video-frame" style="display:grid;place-items:center;color:var(--muted)">Loading the film collection…</div></article>
 </div>
 </div></section>
 
 <section class="section" id="music"><div class="wrap">
-<div class="section-head"><div><div class="eyebrow">03 / Soundtrack</div><h2>The music room</h2></div><span class="pill">5 playlists · YouTube Music</span></div>
+<div class="section-head"><div><div class="eyebrow">04 / Soundtrack</div><h2>The music room</h2></div><span class="pill">5 playlists · YouTube Music</span></div>
 <p class="music-intro">Pick a mood and let it play. These are official YouTube playlist embeds, so the playlists stay connected to your YouTube Music collections. Playback, ads, and availability are controlled by YouTube.</p>
 <div class="music-grid">
 <article class="music-card"><div class="music-card-top"><div><div class="number">PLAYLIST 01</div><h3>POP</h3></div><span class="eyebrow">Bright / catchy</span></div><div class="visualizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><iframe loading="lazy" title="POP playlist" src="https://www.youtube-nocookie.com/embed?listType=playlist&list=PLOD8is_cCamE" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><div class="music-links"><span>For the bright hours</span><a href="https://music.youtube.com/playlist?list=PLOD8is_cCamE" target="_blank" rel="noopener noreferrer">Open in YouTube Music ↗</a></div></article>
@@ -315,7 +334,7 @@ body{background:#07080b}
 </div></section>
 
 <section class="section" id="cinema"><div class="wrap">
-<div class="section-head"><div><div class="eyebrow">04 / Film shelf</div><h2>Movies to remember</h2></div></div>
+<div class="section-head"><div><div class="eyebrow">05 / Film shelf</div><h2>Movies to remember</h2></div></div>
 <div class="movie-grid"><div class="empty-shelf">A curated shelf of films will appear here.</div></div>
 </div></section>
 
@@ -340,7 +359,7 @@ body{background:#07080b}
 </div></section>
 
 <section class="section" id="about"><div class="wrap about-grid">
-<div><div class="eyebrow">06 / Behind the frames</div><h2>A little about this space.</h2></div>
+<div><div class="eyebrow">07 / Behind the frames</div><h2>A little about this space.</h2></div>
 <div><p>This is a personal, evolving collection — photos that hold a mood, videos worth watching, songs for different versions of a day, and films that stay with you after the credits.</p></div>
 </div></section>
 </main>
@@ -380,11 +399,31 @@ if(blurToggle){blurToggle.addEventListener('click',()=>{
   const esc = (v='') => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const safeURL = (value='') => { try { const u = new URL(String(value), window.location.href); return ['http:','https:'].includes(u.protocol) ? u.href : ''; } catch(e) { return ''; } };
   const videoId = (v='') => /^[A-Za-z0-9_-]{6,20}$/.test(String(v)) ? String(v) : '';
+    const extractYouTubeId = (value='') => {
+      try {
+        const u=new URL(String(value));
+        if(u.hostname==='youtu.be') return videoId(u.pathname.slice(1));
+        if(u.pathname.startsWith('/embed/')) return videoId(u.pathname.split('/')[2]||'');
+        return videoId(u.searchParams.get('v')||'');
+      } catch(e) { return videoId(value); }
+    };
   try {
     const [site, photos, videos, playlists, movies] = await Promise.all([
       getJSON('content/site.json'), getJSON('content/photos.json'), getJSON('content/videos.json'),
       getJSON('content/playlists.json'), getJSON('content/movies.json')
     ]);
+    const heroId=extractYouTubeId(site.heroVideoUrl||'');
+    const heroFrame=document.querySelector('.hero-video');
+    const heroWatch=document.querySelector('.hero .actions .btn.primary');
+    if(heroId && heroFrame){heroFrame.src='https://www.youtube-nocookie.com/embed/'+heroId+'?autoplay=1&mute=1&controls=0&loop=1&playlist='+heroId+'&playsinline=1&rel=0&modestbranding=1';}
+    if(heroId && heroWatch) heroWatch.href='https://youtu.be/'+heroId;
+    const videoGrid=document.getElementById('videoGrid');
+    if(videoGrid && Array.isArray(videos)){
+      videoGrid.innerHTML=videos.map(v=>{
+        const id=videoId(v.youtubeId||''); if(!id) return '';
+        return '<article class="video-card"><iframe class="video-frame" loading="lazy" src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1" title="'+esc(v.title||'13XTAR film')+'" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><h3>'+esc(v.title||'Untitled film')+'</h3><p>'+esc(v.description||'A film from the 13XTAR collection.')+'</p><a class="btn" href="https://youtu.be/'+id+'" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></article>';
+      }).join('') || '<div class="empty-shelf">Add films in the Pages CMS content editor.</div>';
+    }
     if (site.heroTitle) document.querySelector('.hero-description h2').textContent = site.heroTitle;
     if (site.heroDescription) document.querySelector('.hero-description .wrap > div:nth-child(2) p').textContent = site.heroDescription;
     const channelLink = document.querySelector('.hero-description a[href*="youtube.com/@13xtar"]');
